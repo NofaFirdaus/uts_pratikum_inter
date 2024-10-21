@@ -21,30 +21,35 @@ class BukuController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['']);
+        $buku=  Buku::create($request->all());
+        return response()->json($buku,201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Buku $buku)
+    public function show(String $id)
     {
-        //
+        $buku=Buku::find($id);
+        return response()->json($buku ,201);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Buku $buku)
+    public function update(Request $request, String $id)
     {
-        //
+        $buku = Buku::find($id);
+         $buku->update($request->all());
+        return response()->json($buku,201);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Buku $buku)
+    public function destroy( String $id)
     {
-        //
+        $buku = Buku::find($id);
+        $buku->delete();
     }
 }
